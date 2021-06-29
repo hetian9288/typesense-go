@@ -266,6 +266,9 @@ type SearchCollectionParams struct {
 
 	// The relative weight to give each `query_by` field when ranking results. This can be used to boost fields in priority, when looking for matches. Multiple fields are separated with a comma.
 	QueryByWeights *[]string `json:"query_by_weights,omitempty"`
+	
+	// 避免对搜索词进行分割
+	PreSegmentedQuery bool `json:"pre_segmented_query,omitempty"`
 
 	// Maximum number of hits returned. Increasing this value might increase search latency. Default: 500. Use `all` to return all hits found.
 	MaxHits *interface{} `json:"max_hits,omitempty"`
