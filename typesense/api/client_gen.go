@@ -1388,17 +1388,20 @@ func NewSearchCollectionRequest(server string, collectionName string, params *Se
 
 	if params.FilterBy != nil {
 
-		if queryFrag, err := runtime.StyleParam("form", true, "filter_by", *params.FilterBy); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
+		// 修复无法支持组合筛选条件
+		queryValues.Add("filter_by", *params.FilterBy)
+
+		// if queryFrag, err := runtime.StyleParam("form", true, "filter_by", *params.FilterBy); err != nil {
+		// 	return nil, err
+		// } else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+		// 	return nil, err
+		// } else {
+		// 	for k, v := range parsed {
+		// 		for _, v2 := range v {
+		// 			queryValues.Add(k, v2)
+		// 		}
+		// 	}
+		// }
 
 	}
 
