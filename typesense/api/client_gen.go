@@ -4129,7 +4129,7 @@ func ParseUpdateDocumentResponse(rsp *http.Response) (*UpdateDocumentResponse, e
 	}
 
 	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode >= 200 && rsp.StatusCode < 300:
 		var dest map[string]interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
